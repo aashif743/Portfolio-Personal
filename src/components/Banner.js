@@ -11,10 +11,10 @@ export const Banner = () => {
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(300 - Math.random() * 100);
   const [setIndex] = useState(1);
-  const toRotate = ["Web Developer", "Web Designer", "UI/UX Designer"];
-  const period = 2000;
 
   useEffect(() => {
+    const toRotate = ["Web Developer", "Web Designer", "UI/UX Designer"]; // Move inside useEffect
+
     const tick = () => {
       let i = loopNum % toRotate.length;
       let fullText = toRotate[i];
@@ -31,6 +31,7 @@ export const Banner = () => {
       if (!isDeleting && updatedText === fullText) {
         setIsDeleting(true);
         setIndex((prevIndex) => prevIndex - 1);
+        // eslint-disable-next-line no-undef
         setDelta(period);
       } else if (isDeleting && updatedText === '') {
         setIsDeleting(false);
@@ -44,12 +45,12 @@ export const Banner = () => {
 
     let ticker = setInterval(() => {
       tick();
-    }, [delta, text, loopNum, isDeleting]);
+    }, [delta, text, loopNum, isDeleting]); // Include the relevant dependencies
 
     return () => {
       clearInterval(ticker);
     };
-  }, [delta, text, loopNum, isDeleting, toRotate, setIndex]);
+  }, [delta, text, loopNum, isDeleting, setIndex]);
 
   return (
     <section className="banner" id="home">
