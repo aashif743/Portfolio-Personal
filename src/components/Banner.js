@@ -10,7 +10,8 @@ export const Banner = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(300 - Math.random() * 100);
-  const [setIndex] = useState(1);
+  const [index, setIndex] = useState(1);
+  const period = 2000;
 
   useEffect(() => {
     const toRotate = ["Web Developer", "Web Designer", "UI/UX Designer"]; // Move inside useEffect
@@ -45,12 +46,12 @@ export const Banner = () => {
 
     let ticker = setInterval(() => {
       tick();
-    }, [delta, text, loopNum, isDeleting]); // Include the relevant dependencies
+    }, [delta]); // Include the relevant dependencies
 
     return () => {
       clearInterval(ticker);
     };
-  }, [delta, text, loopNum, isDeleting, setIndex]);
+  }, [delta, text, loopNum, isDeleting, index, period]);
 
   return (
     <section className="banner" id="home">
@@ -61,7 +62,7 @@ export const Banner = () => {
               {({ isVisible }) =>
               <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                 <span className="tagline">Welcome to my Portfolio</span>
-                <h1>{`Hi! I'm Aashif`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Web Developer", "Web Designer", "UI/UX Designer" ]'><span className="wrap">{text}</span></span></h1>
+                <h1>{`Hi! I'm Aashif`} <span className="txt-rotate" data-period="1000" data-rotate='[ "Web Developer", "Web Designer", "UI/UX Designer" ]'><span className="wrap">{text}</span></span></h1>
                   <p>I'm a skilled software developer, experienced in TypeScript and JavaScript. I specialize in frameworks like React, Node.js, and Three.js. I enjoy quick learning and teamwork, creating efficient, scalable, user-friendly solutions for real-world problems. Let's bring your ideas to life together!</p>
                   <button onClick={() => console.log('connect')}>Let’s Connect <ArrowRightCircle size={25} /></button>
               </div>}
